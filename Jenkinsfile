@@ -1,9 +1,9 @@
 #!groovy
 
-@Library('github.com/teecke/jenkins-pipeline-library@v3.4.1') _
+@Library('github.com/tpbtools/jenkins-pipeline-library@v4.0.0') _
 
 // Initialize global config
-cfg = jplConfig('dc-get-next-release-number', 'bash', '', [email: env.CIKAIROS_NOTIFY_EMAIL_TARGETS])
+cfg = jplConfig('dc-get-next-release-number', 'bash', '', [email: env.CI_NOTIFY_EMAIL_TARGETS])
 
 /**
  * Build and publish docker images
@@ -14,8 +14,8 @@ def buildAndPublishDockerImage(nextReleaseNumber = "") {
     if (nextReleaseNumber == "") {
         nextReleaseNumber = sh (script: "kd get-next-release-number .", returnStdout: true).trim().substring(1)
     }
-    docker.withRegistry("", 'cikairos-docker-credentials') {
-        def customImage = docker.build("kairops/${cfg.projectName}:${nextReleaseNumber}", "--pull --no-cache .")
+    docker.withRegistry("", 'docker-token') {
+        def customImage = docker.build("${env.DOCKER_ORGANIZATION}/${cfg.projectName}:${nextReleaseNumber}", "--pull --no-cache .")
         customImage.push()
         if (nextReleaseNumber != "beta") {
             customImage.push('latest')
@@ -54,6 +54,9 @@ pipeline {
     post {
         always {
             jplPostBuild(cfg)
+        }
+        cleanup {
+            deleteDir()
         }
     }
 
