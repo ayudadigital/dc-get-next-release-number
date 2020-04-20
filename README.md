@@ -13,7 +13,7 @@ Its a part of the Docker Command series
 Execute the following within your repository folder:
 
 - Using Bash: `cd [git-repository-dir]; ./entrypoint.sh`
-- Using Docker: `docker run --rm -v $(pwd):/workspace kairops/dc-get-next-release-number`
+- Using Docker: `docker run --rm -v $(pwd):/workspace tpbtools/dc-get-next-release-number`
 - Using docker-command-launcher: `kd get-next-release-number [git-repository-dir] > CHANGELOG.md`
 
 The function calculate the "Next Tag" of your git repository based on the unreleased commits (a.k.a. the commits that are not covered by any tag) based on [Semver](https://semver.org/) rules and the first wotd of the commit messages.
