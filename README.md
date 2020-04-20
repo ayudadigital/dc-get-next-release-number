@@ -1,7 +1,3 @@
-# DEPRECATED
-
-Please visit https://github.com/tpbtools/dc-get-next-release-number
-
 # Docker Command: Get Next Release Number
 
 Simply calculate Next Release from any GIT repository, writen in BASH
