@@ -1,6 +1,6 @@
 #!groovy
 
-@Library('github.com/ayudadigital/jenkins-pipeline-library@v5.0.0') _
+@Library('github.com/ayudadigital/jenkins-pipeline-library@v6.2.0') _
 
 // Initialize global config
 cfg = jplConfig('dc-get-next-release-number', 'bash', '', [email: env.CI_NOTIFY_EMAIL_TARGETS])
@@ -12,7 +12,7 @@ cfg = jplConfig('dc-get-next-release-number', 'bash', '', [email: env.CI_NOTIFY_
  */
 def buildAndPublishDockerImage(nextReleaseNumber = "") {
     if (nextReleaseNumber == "") {
-        nextReleaseNumber = sh (script: "kd get-next-release-number .", returnStdout: true).trim().substring(1)
+        nextReleaseNumber = jplGetNextReleaseNumber(cfg).substring(1)
     }
     docker.withRegistry("", 'docker-token') {
         def customImage = docker.build("${env.DOCKER_ORGANIZATION}/${cfg.projectName}:${nextReleaseNumber}", "--pull --no-cache .")
