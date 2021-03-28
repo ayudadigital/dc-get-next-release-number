@@ -1,5 +1,22 @@
 # Changelog
 
+## v3.0.1 (2021-03-28)
+
+### Changes
+
+#### Build
+
+* Update Auto Release Log adding v3.0.1 info with JPL ([d7daac3](https://github.com/ayudadigital/dc-get-next-release-number/commit/d7daac3))
+* Use jpl v6.2.0 ([49fdcbb](https://github.com/ayudadigital/dc-get-next-release-number/commit/49fdcbb))
+
+#### Docs
+
+* Generate v3.0.0 changelog with JPL ([8de8bda](https://github.com/ayudadigital/dc-get-next-release-number/commit/8de8bda))
+
+### Authors
+
+* Pedro Amador
+
 ## v3.0.0 (2020-04-24)
 
 ### Changes
